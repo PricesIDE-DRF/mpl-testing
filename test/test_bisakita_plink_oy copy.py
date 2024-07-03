@@ -16,7 +16,7 @@ from utils.assert_attribute import assert_id_exists, assert_unique_attribute_exi
 from utils.assert_redirect import assert_url_contains
 from utils.webdriver_setup import get_webdriver
 
-class TestEWalletflip():
+class TestPaymentLinkOy():
   def setup_method(self, method):
     self.driver = get_webdriver()
     self.vars = {}
@@ -24,8 +24,8 @@ class TestEWalletflip():
   def teardown_method(self, method):
     self.driver.quit()
   
-  def test_eWalletflip(self):
-    self.driver.get("https://basic.amanah-staging.cs.ui.ac.id/")
+  def test_paymentlink_oy(self):
+    self.driver.get("https://bisakita.amanah-staging.cs.ui.ac.id/")
     time.sleep(2)
     self.driver.set_window_size(1552, 832)
     time.sleep(2)
@@ -41,7 +41,7 @@ class TestEWalletflip():
     self.driver.find_element(By.NAME, "paymentMethod").click()
     time.sleep(2)
     dropdown = self.driver.find_element(By.NAME, "paymentMethod")
-    dropdown.find_element(By.XPATH, "//option[. = 'E-Wallet']").click()
+    dropdown.find_element(By.XPATH, "//option[. = 'Payment Link']").click()
     time.sleep(2)
     self.driver.find_element(By.CSS_SELECTOR, ".card-actions > .btn").click()
     time.sleep(2)
@@ -69,20 +69,16 @@ class TestEWalletflip():
     time.sleep(1)
     self.driver.find_element(By.CSS_SELECTOR, ".form-control:nth-child(5) > .input").send_keys("donasi selenium")
     time.sleep(1)
-    self.driver.find_element(By.NAME, "ewallet_type").click()
-    time.sleep(1)
-    self.driver.find_element(By.NAME, "ewallet_type").send_keys("qris")
-    time.sleep(1)
     self.driver.find_element(By.NAME, "vendor_name").click()
     time.sleep(1)
     dropdown = self.driver.find_element(By.NAME, "vendor_name")
-    dropdown.find_element(By.XPATH, "//option[. = 'Flip']").click()
+    dropdown.find_element(By.XPATH, "//option[. = 'Oy']").click()
     time.sleep(1)
     self.driver.find_element(By.CSS_SELECTOR, ".card-actions > .btn").click()
     time.sleep(1)
     
     # Assert page redirect
-    expected_url = "https://basic.amanah-staging.cs.ui.ac.id/viapaymentgateway/list"
+    expected_url = "https://bisakita.amanah-staging.cs.ui.ac.id/viapaymentgateway/list"
     assert_url_contains(self.driver, expected_url)
     
     # Navigate to the last page if pagination exists
@@ -106,5 +102,5 @@ class TestEWalletflip():
         detail_button.click()
         time.sleep(2)
         
-        assert_unique_attribute_exists(self.driver, "e-wallet")
+        assert_unique_attribute_exists(self.driver, "paymentlink")
         assert_id_exists(self.driver)
