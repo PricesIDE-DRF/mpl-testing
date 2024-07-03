@@ -13,6 +13,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support import expected_conditions as EC
 
 from utils.assert_attribute import assert_id_exists, assert_unique_attribute_exists
+from utils.assert_redirect import assert_url_contains
 from utils.webdriver_setup import get_webdriver
 
 class TestEWalletflip():
@@ -36,10 +37,6 @@ class TestEWalletflip():
     element.click()
     self.driver.find_element(By.CSS_SELECTOR, "a > .btn-outline").click()
     
-    # time.sleep(2)
-    # element = self.driver.find_element(By.CSS_SELECTOR, "a > .btn-outline")
-    # actions = ActionChains(self.driver)
-    # actions.move_to_element(element).perform()
     time.sleep(2)
     self.driver.find_element(By.NAME, "paymentMethod").click()
     time.sleep(2)
@@ -49,8 +46,6 @@ class TestEWalletflip():
     self.driver.find_element(By.CSS_SELECTOR, ".card-actions > .btn").click()
     time.sleep(2)
     element = self.driver.find_element(By.CSS_SELECTOR, ".card-actions > .btn")
-    # actions = ActionChains(self.driver)
-    # actions.move_to_element(element).perform()
     time.sleep(1)
 
     # FOrm data
@@ -85,6 +80,10 @@ class TestEWalletflip():
     time.sleep(1)
     self.driver.find_element(By.CSS_SELECTOR, ".card-actions > .btn").click()
     time.sleep(1)
+    
+    # Assert page redirect
+    expected_url = "https://basic.amanah-staging.cs.ui.ac.id/viapaymentgateway/list"
+    assert_url_contains(self.driver, expected_url)
     
     # Navigate to the last page if pagination exists
     while True:
