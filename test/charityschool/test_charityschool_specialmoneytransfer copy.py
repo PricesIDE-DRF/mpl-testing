@@ -47,9 +47,11 @@ class TestSpecialMoneyTransfer():
     )
     aktivitas_link.click()
     
-    self.driver.find_element(By.CSS_SELECTOR, "li:nth-child(1) > .rounded-box span").click()
-    time.sleep(1)
-    self.driver.find_element(By.CSS_SELECTOR, ".w-full:nth-child(2) a:nth-child(1) > .btn").click()
+    time.sleep(2)
+    tarik_dana_button = WebDriverWait(self.driver, 10).until(
+    EC.element_to_be_clickable((By.XPATH, "(//button[contains(text(), 'Tarik Dana')])[1]"))
+    )
+    tarik_dana_button.click()
     time.sleep(1)
     self.driver.find_element(By.NAME, "disbursementMethod").click()
     time.sleep(1)
