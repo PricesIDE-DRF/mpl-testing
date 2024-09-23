@@ -1,0 +1,3 @@
+# Automated Functional Testing and API Testing for the Payment Gateway Multi Product Line
+
+This project contains functional testing (X Amanah) and API testing for the Payment Gateway Multi Product Line. The functional testing is located in folder `amanah_functional_testing`, and the API testing is available in folder `payment_gateway_api_testing`. Further explanations regarding both tests can be found in their respective test folders.
