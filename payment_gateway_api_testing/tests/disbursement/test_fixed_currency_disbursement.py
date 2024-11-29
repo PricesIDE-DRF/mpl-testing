@@ -4,7 +4,7 @@ from requests import Response
 from typing import Dict, Any
 
 
-class TestSpecialDisbursement(unittest.TestCase):
+class TestFixedCurrencyDisbursement(unittest.TestCase):
     print_flag = True
 
     def setUp(self):
@@ -14,13 +14,13 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.vendor = getattr(self, 'vendor', None)
         self.authorization_token = getattr(self, 'authorization_token', None)
 
-        if TestSpecialDisbursement.print_flag:
+        if TestFixedCurrencyDisbursement.print_flag:
             print()
             print()
-            print(f"========== TEST SPECIAL DISBURSEMENT FEATURE WITH VENDOR {self.vendor.upper()} ==========")
-            TestSpecialDisbursement.print_flag = False
+            print(f"========== TEST FIXED CURRENCY DISBURSEMENT FEATURE WITH VENDOR {self.vendor.upper()} ==========")
+            TestFixedCurrencyDisbursement.print_flag = False
     
-    def test_special_disbursement_success(self):
+    def test_fixed_currency_disbursement_success(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -57,7 +57,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_account_number_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_account_number_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "amount": "100000",
@@ -82,7 +82,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_amount_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_amount_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -107,7 +107,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_bank_code_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_bank_code_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -132,7 +132,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_direction_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_direction_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -157,7 +157,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
 
-    def test_special_disbursement_failed_because_wrong_direction_type(self):
+    def test_fixed_currency_disbursement_failed_because_wrong_direction_type(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -183,7 +183,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_sender_country_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_sender_country_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -208,7 +208,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_sender_name_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_sender_name_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -233,7 +233,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_sender_address_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_sender_address_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -258,7 +258,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_special_disbursement_failed_because_there_is_no_sender_job_in_the_payload(self):
+    def test_fixed_currency_disbursement_failed_because_there_is_no_sender_job_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "account_number": "98359135235",
@@ -284,7 +284,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         self.assertEqual(response_payload, expected_response_payload)
     
     def __fetch_api(self, payload: Dict[str, Any]) -> Response:
-        from main import SPECIAL_DISBURSEMENT_URL
+        from main import FIXED_CURRENCY_DISBURSEMENT_URL
 
         headers = {
             "Authorization": self.authorization_token,
@@ -292,7 +292,7 @@ class TestSpecialDisbursement(unittest.TestCase):
         }
         
         return requests.post(
-            url = SPECIAL_DISBURSEMENT_URL,
+            url = FIXED_CURRENCY_DISBURSEMENT_URL,
             json = payload,
             headers = headers
         )
