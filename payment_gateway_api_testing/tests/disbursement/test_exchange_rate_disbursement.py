@@ -4,20 +4,20 @@ from requests import Response
 from typing import Dict, Any
 
 
-class TestInternationalDisbursement(unittest.TestCase):
+class TestExchangeRateDisbursement(unittest.TestCase):
     print_flag = True
 
     def setUp(self):
         self.vendor = getattr(self, 'vendor', None)
         self.authorization_token = getattr(self, 'authorization_token', None)
 
-        if TestInternationalDisbursement.print_flag:
+        if TestExchangeRateDisbursement.print_flag:
             print()
             print()
-            print(f"========== TEST INTERNATIONAL DISBURSEMENT FEATURE WITH VENDOR {self.vendor.upper()} ==========")
-            TestInternationalDisbursement.print_flag = False
+            print(f"========== TEST EXCHANGE RATE DISBURSEMENT FEATURE WITH VENDOR {self.vendor.upper()} ==========")
+            TestExchangeRateDisbursement.print_flag = False
     
-    def test_international_disbursement_with_transaction_type_c2b_success(self):
+    def test_exchange_rate_disbursement_with_transaction_type_c2b_success(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -77,7 +77,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_with_transaction_type_c2c_success(self):
+    def test_exchange_rate_disbursement_with_transaction_type_c2c_success(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -137,7 +137,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_failed_because_there_is_no_beneficiary_account_number_in_the_payload(self):
+    def test_exchange_rate_disbursement_failed_because_there_is_no_beneficiary_account_number_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -181,7 +181,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_failed_because_there_is_no_amount_in_the_payload(self):
+    def test_exchange_rate_disbursement_failed_because_there_is_no_amount_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -225,7 +225,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_failed_because_there_is_no_beneficiary_bank_name_in_the_payload(self): 
+    def test_exchange_rate_disbursement_failed_because_there_is_no_beneficiary_bank_name_in_the_payload(self): 
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -269,7 +269,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_failed_because_there_is_no_sender_country_in_the_payload(self):
+    def test_exchange_rate_disbursement_failed_because_there_is_no_sender_country_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -313,7 +313,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_failed_because_there_is_no_sender_name_in_the_payload(self):
+    def test_exchange_rate_disbursement_failed_because_there_is_no_sender_name_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -357,7 +357,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_failed_because_there_is_no_sender_address_in_the_payload(self):
+    def test_exchange_rate_disbursement_failed_because_there_is_no_sender_address_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -401,7 +401,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response_payload, expected_response_payload)
     
-    def test_international_disbursement_failed_because_there_is_no_sender_job_in_the_payload(self):
+    def test_exchange_rate_disbursement_failed_because_there_is_no_sender_job_in_the_payload(self):
         request_payload = {
             "vendor_name": self.vendor,
             "destination_country": "GBR",
@@ -446,7 +446,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         self.assertEqual(response_payload, expected_response_payload)
     
     def __fetch_api(self, payload: Dict[str, Any]) -> Response:
-        from main import INTERNATIONAL_DISBURSEMENT_URL
+        from main import EXCHANGE_RATE_DISBURSEMENT_URL
 
         headers = {
             "Authorization": self.authorization_token,
@@ -454,7 +454,7 @@ class TestInternationalDisbursement(unittest.TestCase):
         }
         
         return requests.post(
-            url = INTERNATIONAL_DISBURSEMENT_URL,
+            url = EXCHANGE_RATE_DISBURSEMENT_URL,
             json = payload,
             headers = headers
         )
