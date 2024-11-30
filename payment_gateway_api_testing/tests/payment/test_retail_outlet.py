@@ -21,13 +21,14 @@ class TestRetailOutlet(unittest.TestCase):
         request_payload = {
             f"vendor_name": self.vendor,
             "amount" : "145000",
-            "retailOutlet":"indomaret",
+            "retail_outlet": "indomaret",
         }
 
         expected_response_payload = {
             "data": {
                 "vendorName": self.vendor,
-                "amount": 145000,
+                "amount": 145000.0,
+                "retailOutlet": "indomaret",
             }
         }
 
@@ -47,7 +48,7 @@ class TestRetailOutlet(unittest.TestCase):
     def test_retail_outlet_failed_because_there_is_no_amount_in_the_payload(self):
         request_payload = {
             f"vendor_name": self.vendor,
-            "retailOutlet":"indomaret",
+            "retail_outlet":"indomaret",
         }
 
         expected_response_payload = {
@@ -71,7 +72,7 @@ class TestRetailOutlet(unittest.TestCase):
 
         expected_response_payload = {
             "data": {
-                "message": "Bad Request: retailOutlet tidak ditemukan pada payload.",
+                "message": "Bad Request: retail_outlet tidak ditemukan pada payload.",
                 "vmjErrorCode": 4000
             }
         }
